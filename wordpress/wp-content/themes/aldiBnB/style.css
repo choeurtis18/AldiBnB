@@ -4,3 +4,24 @@ Description: Un thème novateur pour un site élégant
 Author: John Bob
 Version: 1.0.0
  */
+
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+ * {
+   margin: 0;
+   padding: 0;
+   font-family: 'Roboto', sans-serif;
+ }
+
+ p, ul {
+   margin-bottom: 0!important;
+ }
+
+ li {
+  list-style: none;
+ }
+
+ a {
+  text-decoration: none;
+ }
+
+
