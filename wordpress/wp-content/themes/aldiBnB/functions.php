@@ -84,3 +84,5 @@ $checkbox = new SponsoCheckbox('wpheticSponso');
 
 require_once('Classes/PropertyInformations.php');
 PropertyInformations::register($_POST);
+
+include_once ABSPATH . 'wp-admin/includes/plugin.php';
