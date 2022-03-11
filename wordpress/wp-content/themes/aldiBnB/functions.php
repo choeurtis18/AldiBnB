@@ -79,6 +79,20 @@ function aldbnbInit() {
     register_post_type('property', $args);
 }
 
+function add_moderator_role() {
+    add_role(
+        'moderator',
+        'Modérateur/Modératrice',
+        array(
+            'read' => true,
+            'edit_posts' => true,
+            'moderate_comments' => true,
+        ),
+    );
+}
+ 
+add_action( 'init', 'add_moderator_role');
+
 require 'Classes/SponsoCheckbox.php';
 $checkbox = new SponsoCheckbox('wpheticSponso');
 
@@ -86,3 +100,4 @@ require_once('Classes/PropertyInformations.php');
 PropertyInformations::register($_POST);
 
 include_once ABSPATH . 'wp-admin/includes/plugin.php';
+
