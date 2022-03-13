@@ -4,24 +4,200 @@ Description: Un thème novateur pour un site élégant
 Author: John Bob
 Version: 1.0.0
  */
-
+ 
  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
  * {
-   margin: 0;
-   padding: 0;
-   font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    color: #202020;
  }
-
+ 
  p, ul {
-   margin-bottom: 0!important;
+    margin-bottom: 0!important;
  }
-
+ 
  li {
-  list-style: none;
+   list-style: none;
+ }
+ 
+ a {
+   text-decoration: none!important;
+   color: #202020;
+ }
+ 
+ html {
+   margin: 0!important;
  }
 
- a {
-  text-decoration: none;
+ /* ========= Nav bar ========== */
+  
+ #abnb-navbar {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 5px 60px;
+   background-color: #EAEAEA;
  }
+ 
+ .abnb-nav-child {
+   display: flex;
+   align-items: center;
+ }
+ 
+ .abnb-icon p {
+   font-size: 1.5rem;
+   font-weight: 700;
+ }
+ .abnb-icon img {
+   width: 35px;
+   margin-right: 15px;
+ }
+ 
+ .abnb-nav-link, .abnb-register {
+   text-transform: uppercase;
+   font-size : 1rem;
+   font-weight: 500;
+   padding: 0;
+ }
+
+ .abnb-nav-link a:hover {
+   color: #A47035;
+ }
+ 
+ .sub-menu {
+   display: flex;
+ }
+
+ .abnb-nav-child .abnb-icon {
+   margin-left: 15px;
+   color: #A47035;
+   font-size: 1.3rem;
+   font-weight: 600;
+ }
+
+ .abnb-nav-child .nav-link, .abnb-register {
+   color: #202020;
+ }
+ 
+ /* ========= Search bar ========== */
+
+ .form-searchBar {
+  width: 50%;
+  display: flex;
+  margin: 0 auto;
+}
+
+.form-searchBar input {
+  border-radius: 10px;
+  margin-right: 15px;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 25%);
+  justify-content: center;
+  padding: 8px 35px;
+  width: 75%;
+}
+
+.form-searchBar input:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.form-searchBar button {
+  background: #A47035;
+  color: #eaeaea;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 25%);
+  padding: 8px 20px;
+  width: 25%;
+}
+
+/* ========= Header ========== */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 60px;
+  background: #202020;
+  background : linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url("http://localhost:5555/wp-content/uploads/2022/02/bg.jpeg"); 
+  background-size: cover;
+  background-position: center;
+  height: 100vh; 
+}
+
+.header-title {
+  width: 60%;
+}
+
+.header-title p {
+  color: #eaeaea;
+  text-align: left;
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+p.header-frist_child {
+  color: #A47035;
+}
+
+/* ========= Home Container ========== */
+
+.home-container {
+  padding: 60px;
+}
+
+.home-container-item {
+  margin-bottom: 60px;
+}
+
+.home-container-item h3 {
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+}
+
+.category-cards, .offers-cards{
+  display: flex;
+  justify-content: space-between;
+}
+
+.category-cards-item, .offers-cards-item {
+  width: calc(100% / 5);
+  word-break: break-word;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 25%);
+  padding: 20px;
+}
+
+/* ========= Footer ========== */
+
+footer {
+  background-color: #202020;
+  padding: 20px;
+}
+
+footer p, .nav-item .nav-link, .footer-icon {
+  color: #eaeaea;
+}
+
+.abnb-footer-child {
+  color: #eaeaea;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.footer-section {
+  margin-bottom: 40px;
+}
+
+.abnb-footer-icon img {
+  width: 30px;
+}
+
 
 
