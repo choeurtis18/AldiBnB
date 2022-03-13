@@ -12,66 +12,6 @@
 </head>
 <body>
 
-<style>
-  html {
-    margin: 0!important;
-  }
-
-  #abnb-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #EAEAEA;
-  }
-
-  #abnb-navbar a {
-    text-decoration: none;
-  }
-
-  .abnb-nav-child {
-    display: flex;
-    text-decoration: none;
-    align-items: center;
-  }
-
-  .abnb-icon {
-    color: #202020;
-    margin-left: 10px;
-    text-transform: none;
-  }
-
-  .abnb-icon p {
-    font-size: 1.7rem;
-    font-weight: 700;
-  }
-  .abnb-icon img {
-    width: 40px;
-    margin-right: 15px;
-  }
-
-  .abnb-nav-link {
-    list-style-type: none;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size : 1.1rem;
-    font-weight: 500;
-    color: #202020;
-  }
-  .abnb-nav-link a{
-    color: #202020;
-  }
-
-  .abnb-register {
-    color: #202020;
-    font-size : 18px;
-  }
-
-  .sub-menu {
-    display: flex;
-  }
-</style>
-
 <nav id="abnb-navbar">
   <a href="<?php echo home_url(); ?>">
     <div id="" class="abnb-nav-child abnb-icon">
