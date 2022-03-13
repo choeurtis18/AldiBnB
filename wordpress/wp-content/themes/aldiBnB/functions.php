@@ -86,3 +86,181 @@ require_once('Classes/PropertyInformations.php');
 PropertyInformations::register($_POST);
 
 include_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+
+function add_property_form_management() {
+	if (isset($_POST['property-infos-envoi']) && isset($_POST['property-verif'])) {
+
+		if (wp_verify_nonce($_POST['property-verif'], 'add-property')) {
+
+            echo ("</br>");
+            echo ("</br>");
+            if (empty($_POST["aldibnb-name"])) {
+                global $nameErr; 
+                $nameErr= "Name is required";
+            } else {
+                $name = strval($_POST['aldibnb-name']);
+            }
+            global $priceErr ;
+            if (empty($_POST["aldibnb-prix"])) {    
+                $priceErr= "Price is required";
+            } else {
+                if((int) $_POST['aldibnb-prix']) {
+                    $prix = intval($_POST['aldibnb-prix']);
+                } else {
+                    $priceErr= "Price is not number";
+                }
+            }
+
+            if (empty($_POST["aldibnb-localisation"])) {
+                global $localisationErr;
+                $localisationErr = "Localisation is required";
+            } else {
+                $localisation = strval($_POST['aldibnb-localisation']);
+            }
+
+            global $categoryErr;
+            if (empty($_POST["aldibnb-category"])) {
+                $categoryErr = "Category is required";
+            } else {
+                if($_POST['aldibnb-category'] == 'appartement') {
+                    $category = array(3);
+                } elseif ($_POST['aldibnb-category'] == 'chalet') {
+                    $category = array(5);
+                } elseif ($_POST['aldibnb-category'] == 'maison') {
+                    $category = array(4);
+                } elseif ($_POST['aldibnb-category'] == 'villa') {
+                    $category = array(2);
+                } else {
+                    $categoryErr = "Unknow Category";
+                }  
+            }
+
+            /*
+            if (empty($_POST["aldibnb-image"])) {
+                global $imageErr;
+                $imageErr = "Image is required";
+            } else {
+                $image = strval($_POST['aldibnb-image']);
+            }
+            */
+
+            if (empty($_POST["aldibnb-description"])) {
+                global $descriptionErr;
+                $descriptionErr = "Description is required";
+            } else {
+                $description = strval($_POST['aldibnb-description']);
+            }
+            
+            if($name && $prix && count($category) >0 && $localisation && $description) {
+                $my_post = array(
+                    'post_title'    => $name,
+                    'post_type'     => 'property',
+                    'post_content'  => '',
+                    'post_status'   => 'draft',
+                    'post_author'   => 1,
+                    'post_category' => $category
+                );
+    
+                $post_id = wp_insert_post($my_post);
+                update_post_meta($post_id, '_description', $description);
+                update_post_meta($post_id, '_price', $prix);
+                update_post_meta($post_id, '_localisation', $localisation);
+                
+                set_post_thumbnail($post_id, 4);
+                
+                global $information;
+                $information = "Propriété envoyé";
+            }
+		}
+
+	}
+}
+add_action('template_redirect', 'add_property_form_management');
+
+function update_property_form_management() {
+	if (isset($_POST['property-update-infos-envoi']) && isset($_POST['property-update-verif'])) {
+
+		if (wp_verify_nonce($_POST['property-update-verif'], 'update-property')) {
+
+            if (empty($_POST["aldibnb-name"])) {
+                global $nameErr; 
+                $nameErr= "Name is required";
+            } else {
+                $name = strval($_POST['aldibnb-name']);
+            }
+            global $priceErr ;
+            if (empty($_POST["aldibnb-prix"])) {    
+                $priceErr= "Price is required";
+            } else {
+                if((int) $_POST['aldibnb-prix']) {
+                    $prix = intval($_POST['aldibnb-prix']);
+                } else {
+                    $priceErr= "Price is not number";
+                }
+            }
+
+            if (empty($_POST["aldibnb-localisation"])) {
+                global $localisationErr;
+                $localisationErr = "Localisation is required";
+            } else {
+                $localisation = strval($_POST['aldibnb-localisation']);
+            }
+
+            global $categoryErr;
+            if (empty($_POST["aldibnb-category"])) {
+                $categoryErr = "Category is required";
+            } else {
+                if($_POST['aldibnb-category'] == 'appartement') {
+                    $category = array(3);
+                } elseif ($_POST['aldibnb-category'] == 'chalet') {
+                    $category = array(5);
+                } elseif ($_POST['aldibnb-category'] == 'maison') {
+                    $category = array(4);
+                } elseif ($_POST['aldibnb-category'] == 'villa') {
+                    $category = array(2);
+                } else {
+                    $categoryErr = "Unknow Category";
+                }  
+            }
+
+            /*
+            if (empty($_POST["aldibnb-image"])) {
+                global $imageErr;
+                $imageErr = "Image is required";
+            } else {
+                $image = strval($_POST['aldibnb-image']);
+            }
+            */
+
+            if (empty($_POST["aldibnb-description"])) {
+                global $descriptionErr;
+                $descriptionErr = "Description is required";
+            } else {
+                $description = strval($_POST['aldibnb-description']);
+            }
+            
+            if($name && $prix && count($category) >0 && $localisation && $description) {
+                $post_id = get_post(intval($_POST['aldibnb-id']))->ID;
+                $my_post = array(
+                    'ID'            => $post_id,
+                    'post_title'    => $name,
+                    'post_category' => $category
+                );
+    
+                wp_update_post($my_post);
+                update_post_meta($post_id, '_description', $description);
+                update_post_meta($post_id, '_price', $prix);
+                update_post_meta($post_id, '_localisation', $localisation);
+                
+                //set_post_thumbnail($post_id, 4);
+                
+                global $information;
+                $information = "MISE A JOUR TERMINE";
+            }
+		}
+
+	}
+}
+add_action('template_redirect', 'update_property_form_management');
+
