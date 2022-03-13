@@ -26,10 +26,8 @@ $categories = get_categories( array(
           $category_link = get_category_link( $category_id );
         ?>
         <div class="category-cards-item">
-          <div class="card-body text-center">
-            <a href= <?= esc_url( $category_link ) ?>> <?= $category->name; ?></a>
-            <p><?= $category->category_description ?></p>
-          </div>
+          <a href= <?= esc_url( $category_link ) ?>> <?= $category->name; ?></a>
+          <img src="<?= $category->category_description ?>" alt="">
         </div>
       <?php } ?>
     </div>
@@ -38,34 +36,33 @@ $categories = get_categories( array(
   <div class="home-container-item">
     <h3>Des offres qui pourraient vous plaire</h3>
     <div class="offers-cards">
-    <?php 
-    
-      $args = array(
-        'post_type'   => 'property',
-        'meta_key'         => 'wpheticSponso',
-        'meta_value'       => 'true'
-      );
-      $properties = get_posts( $args );
-    
-    ?>
-    <?php 
-    foreach($properties as $property) {
-    ?>
-    <?php 
-      $prop = array(
-        "id" => $property->ID,
-        "name" => $property->post_title, 
-        "link" => $property->guid,
-        "image" => get_the_post_thumbnail_url($property->ID, 'full')
-      );
-    ?>
+      <?php 
+      
+        $args = array(
+          'post_type'   => 'property',
+          'meta_key'         => 'wpheticSponso',
+          'meta_value'       => 'true'
+        );
+        $properties = get_posts( $args );
+      
+      ?>
+      <?php 
+      foreach($properties as $property) {
+      ?>
+      <?php 
+        $prop = array(
+          "id" => $property->ID,
+          "name" => $property->post_title, 
+          "link" => $property->guid,
+          "_price" => get_post_meta( $property->ID, '_price', true ),
+          "image" => get_the_post_thumbnail_url($property->ID, 'full')
+        );
+      ?>
       <div class="offers-cards-item">
-        <div class="card-body text-center">
-          <a href= <?= $prop['link']; ?>> <?= $prop['name']; ?></a>
-          <p><?= $prop['image']; ?></p>
-        </div>
+          <img src="<?= $prop['image']; ?>" alt="">
         <div class="card-details">
-          <p>hello</p>
+          <a href= <?= $prop['link']; ?>> <?= $prop['name']; ?></a>
+          <p><?= $prop['_price']; ?></p>
         </div>
       </div>
     <?php } ?>
