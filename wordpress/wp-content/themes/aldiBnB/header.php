@@ -29,16 +29,28 @@
   ?>
 
   <div id="abnb-register-block" class="abnb-nav-child">
-    <a id="abnb-inscription" class="abnb-register" href="#">S'inscrire</a> /
-    <a id="abnb-connection" class="abnb-register" href="#">Se connecter</a>
-    <i class="fa fa-sign-out abnb-icon"aria-hidden="true"></i>
+    <?php if ((is_user_logged_in()) ) { ?>
+      <a href="<?php echo wp_logout_url(site_url() );  ?>">
+         <i class="fa fa-sign-out abnb-icon"aria-hidden="true"></i>
+      </a>   
+    <?php } else { ?>
+      <a id="abnb-inscription" class="abnb-register" href="/register">S'inscrire</a> /
+      <a id="abnb-connection" class="abnb-register" href="/login">Se connecter</a>
+    <?php } ?>
   </div>
   
   <!--<?php get_search_form(); ?> -->
     
 </nav>
 
-
+<?php
+    if(get_option('text_promo') == true && is_plugin_active('promo-plugin/promo-plugin.php'));
+    {
+        ?>
+            <div style="background-color:<?=get_option('color_promo');?>;padding:1px; position: sticky; top:0;"><h3 style="font-size:2.2rem; text-align:center; color:<?=get_option('text_color_promo')?>"><?=get_option('text_promo');?></h3></div>
+        <?php
+    } 
+?>
 <div class="abnb-container">
 
 
