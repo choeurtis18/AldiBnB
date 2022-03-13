@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <?php if (have_posts()) : ?>
-    <div class="card-group">
+    <div class="page-container">
         <?php while (have_posts()) : ?>
             <?php the_post(); ?>
             <?php 
@@ -15,10 +15,31 @@
                     "_price" => get_post_meta( get_the_ID(), '_price', true ),
                     "_localisation" => get_post_meta( get_the_ID(), '_localisation', true )
                 );
-
-                echo '</br>';
-                var_dump($prop);
             ?>
+            <div class="post-img-container">
+                <img class="post-largeImg" src="<?= $prop['image']; ?>" alt="">
+                <div class="post-img-group">
+                    <img class="post-mediumImg" src="<?= $prop['image']; ?>" alt="">
+                    <div class="post-img-subGroup">
+                        <img class="post-double-img" src="<?= $prop['image']; ?>" alt="">
+                        <img class="post-double-img" src="<?= $prop['image']; ?>" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="post-info-container">
+                <div class="post-info">
+                    <h1><?= $prop['name']; ?></h1>
+                    <h3><?= $prop['_localisation']; ?></h3>
+                </div>
+                <h2><?= $prop['_price']; ?></h2>
+            </div>
+
+            <div class="post-description-container">
+                <h4>Description</h4>
+                <p><?= $prop['_description']; ?></p>
+            </div>
+            
 
         <?php endwhile; ?>
     </div>
