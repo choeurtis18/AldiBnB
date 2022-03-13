@@ -19,7 +19,13 @@
                 echo '</br>';
                 var_dump($prop);
             ?>
-
+            <?php  
+            if(comments_open() || get_comments_number())
+            {
+                comments_template();
+            }
+            
+            ?>
         <?php endwhile; ?>
     </div>
 
