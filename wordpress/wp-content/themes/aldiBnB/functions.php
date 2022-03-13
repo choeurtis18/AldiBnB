@@ -79,6 +79,23 @@ function aldbnbInit() {
     register_post_type('property', $args);
 }
 
+
+
+function redirect_to_custom_login(){
+    wp_redirect(site_url() . "/login");
+    exit();
+}
+add_action("wp_logout","redirect_to_custom_login");
+
+add_action("init","fn_redirect_wp_admin");
+function fn_redirect_wp_admin(){
+    global $pagenow;
+    if($pagenow == "wp-login.php" && $_GET['action'] != "logout"){
+        wp_redirect(site_url() . "/login");
+        exit();
+    }
+}
+
 function add_moderator_role() {
     add_role(
         'moderator',
@@ -93,6 +110,7 @@ function add_moderator_role() {
  
 add_action( 'init', 'add_moderator_role');
 
+
 require 'Classes/SponsoCheckbox.php';
 $checkbox = new SponsoCheckbox('wpheticSponso');
 
@@ -101,6 +119,26 @@ PropertyInformations::register($_POST);
 
 include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
+
+
+
+
+function tf_check_user_role( $roles ) {
+    if ( is_user_logged_in() ) :
+        $user = wp_get_current_user();
+        $currentUserRoles = $user->roles;
+        $isMatching = array_intersect( $currentUserRoles, $roles);
+        $response = false;
+        if ( !empty($isMatching) ) :
+            $response = true;        
+        endif;
+        return $response;
+    endif;
+}
+$roles = [ 'customer', 'subscriber' ];
+if ( tf_check_user_role($roles) ) :
+    add_filter('show_admin_bar', '__return_false');
+endif;
 
 function add_property_form_management() {
 	if (isset($_POST['property-infos-envoi']) && isset($_POST['property-verif'])) {
@@ -277,4 +315,5 @@ function update_property_form_management() {
 	}
 }
 add_action('template_redirect', 'update_property_form_management');
+
 
