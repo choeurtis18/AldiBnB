@@ -81,7 +81,7 @@
         );
     ?>
 	<h1 id="aldibnb-form-card-title">Mettre à jour une Annonce</h1>
-	<form action="#" method="POST" class="aldibnb-form">
+	<form action="#" method="POST" class="aldibnb-form" enctype="multipart/form-data">
 		<?php wp_nonce_field('update-property', 'property-update-verif'); ?>
 		
         <input style="display: none;" type="text" name="aldibnb-id" value="<?php echo $prop['id'];?>"/>
