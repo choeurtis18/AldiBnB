@@ -3,7 +3,6 @@
 class PropertyInformations
 {
     const META_KEY = 'infos_property';
-    const META_KEY_EXTRAIT = '_extrait';
     const META_KEY_DESCRIPTION = '_description';
     const META_KEY_PRICE = '_price';
     const META_KEY_LOCALISATION = '_localisation';
@@ -25,17 +24,11 @@ class PropertyInformations
 
     public static function render_property($post)
     {
-        $extrait = get_post_meta($post->ID, self::META_KEY_EXTRAIT, true);
         $description   = get_post_meta($post->ID, self::META_KEY_DESCRIPTION, true);
         $price = get_post_meta($post->ID, self::META_KEY_PRICE, true);
         $localisation  = get_post_meta($post->ID, self::META_KEY_LOCALISATION, true);
     
         ?>
-        Extrait :</br><textarea 
-                            style="height: 100px; width: 300px;" 
-                            name="<?= self::META_KEY_EXTRAIT ?>" 
-                            maxlength="150"><?= $extrait; ?>
-                        </textarea></br>
         Description :</br><textarea 
                             style="height: 160px; width: 900px;" 
                             name="<?= self::META_KEY_DESCRIPTION ?>"
@@ -59,11 +52,6 @@ class PropertyInformations
     {
         if (current_user_can('edit_post', $post_id))
         {
-            if (array_key_exists(self::META_KEY_EXTRAIT, $_POST)) {
-                update_post_meta($post_id, self::META_KEY_EXTRAIT, esc_textarea($_POST[self::META_KEY_EXTRAIT]));
-            } else {
-                delete_post_meta($post_id, self::META_KEY_EXTRAIT);
-            }
             if (array_key_exists(self::META_KEY_DESCRIPTION, $_POST)){
                 update_post_meta($post_id, self::META_KEY_DESCRIPTION, esc_textarea($_POST[self::META_KEY_DESCRIPTION]));
             } else {
