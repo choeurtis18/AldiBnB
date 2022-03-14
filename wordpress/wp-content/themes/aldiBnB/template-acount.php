@@ -73,11 +73,12 @@
     align-items: flex-end;
     justify-content: right;
 }
+
 </style>
 <div id="aldibnb-acount" class="page-container">
     <div id="aldibnb-acount-header">
         <h1 id="aldibnb-acount-header-title"><?php if ( isset($current_user) ) {echo $current_user->user_login;} ?>, bienvenue sur votre compte</h1>
-        <span id="aldibnb-acount-header-description">A partir de cette page, vous pouvez ajouter des offres mais également consulter vos offres (posté, en attente).</span>
+        <p id="aldibnb-acount-header-description">A partir de cette page, vous pouvez ajouter des offres mais également consulter vos offres (posté, en attente).</p>
         <a id="aldibnb-acount-header-link-to-create-annonce" href="add-property">Ajouter une Annonce</a>
     </div>
     <div id="aldibnb-acount-post_poste">
@@ -121,8 +122,8 @@
 
     <div class="aldibnb-acount-post" id="aldibnb-acount-post_attente">
         <h1 class="aldibnb-acount-post-title">Annonces En Attente</h1>
-        <span>Vos annonces sont en cours de vérification, celles-ci seront publiées et déplacées dans "Annonces postés" une fois validées.</span>
-        <div class="aldibnb-acount-post-cards" id="aldibnb-acount-post_attente-cards">
+        <p>Vos annonces sont en cours de vérification, celles-ci seront publiées et déplacées dans "Annonces postés" une fois validées.</p>
+        <div class="offers-cards" style="width:100%;" id="aldibnb-acount-post_attente-cards">
         <?php 
             $args = array(
                 'post_type'     => 'property',
@@ -143,13 +144,15 @@
                 "price" => get_post_meta( $property->ID, '_price', true )
             );
             ?>
-            <div class="aldibnb-acount-post-card" id="aldibnb-acount-post_attente-card">
-                <img class="aldibnb-acount-post-card-img" id="aldibnb-acount-post_attente-card-img"
+            <div class="offers-cards-item" id="aldibnb-acount-post_attente-card">
+                <img id="aldibnb-acount-post_attente-card-img"
                     src="<?= $prop['image']; ?>"
                     alt="<?= $prop['name']; ?> img"
                 >
-                <a class="aldibnb-acount-post-card-title" id="aldibnb-acount-post_attente-card-title" href="update-property?post=<?= $prop['id']; ?>"> <?= $prop['name']; ?></a>
-                <span class="aldibnb-acount-post-card-price" id="aldibnb-acount-post_attente-card-price"><?= $prop['price']; ?>€ / Nuit</span>
+                <div class="card-details">
+                    <a id="aldibnb-acount-post_attente-card-title" href="update-property?post=<?= $prop['id']; ?>"> <?= $prop['name']; ?></a>
+                    <p id="aldibnb-acount-post_attente-card-price"><?= $prop['price']; ?>€ / Nuit</p>
+                </div>
             </div>
         <?php } ?>
         </div>
