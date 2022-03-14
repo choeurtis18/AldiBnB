@@ -30,6 +30,10 @@ Version: 1.0.0
    margin: 0!important;
  }
 
+ img {
+   object-fit: cover;
+ }
+
  /* ========= Nav bar ========== */
   
  #abnb-navbar {
@@ -66,7 +70,7 @@ Version: 1.0.0
  }
  
  .sub-menu {
-   display: flex;
+   display: none;
  }
 
  .abnb-nav-child .abnb-icon {
@@ -165,6 +169,7 @@ p.header-frist_child {
 
 .category-cards, .offers-cards{
   display: flex;
+  flex-wrap: wrap;
 }
 
 .category-cards-item {
@@ -177,7 +182,7 @@ p.header-frist_child {
   align-items: center;
   background: #000;
   position: relative;
-  margin: 0 33px;
+  margin: 20px 33px;
 }
 
 .category-cards-item a{
@@ -202,7 +207,7 @@ p.header-frist_child {
   word-break: break-word;
   border-radius: 10px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 25%);
-  margin: 0 33px;
+  margin: 20px 33px;
 }
 
 .offers-cards-item img {
@@ -260,8 +265,9 @@ p.header-frist_child {
   justify-content: space-between;
 }
 
-.post-double-img {
+.post-smallImg {
   width: 48%;
+  height: 170px;
 }
 
 /* Post Infos Container */
@@ -333,6 +339,7 @@ footer p, .footer-icon {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
 }
 
 /* .abnb-footer-child li {
@@ -356,6 +363,65 @@ footer p, .footer-icon {
 .footer-icon {
   margin: 0 15px;
   color: #A47035;
+}
+
+@media screen and (max-width: 967px) {
+  /* ========= NavBar ========== */
+  #abnb-navbar {
+    padding: 5px 10px;
+  }
+
+  .abnb-icon p {
+    display: none;
+  }
+
+  /* ========= Header ========== */
+  .form-searchBar {
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+  }
+
+  .form-searchBar input {
+    margin-right: 0;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .form-searchBar button {
+    width: 100%;
+  }
+
+  .header-title {
+    width: 100%;
+  }
+
+  .header-title p {
+    font-size: 2rem;
+  }
+
+  /* ========= Home Container ========== */
+  .home-container {
+    padding: 40px 20px;
+  }
+
+  .home-container-item {
+    margin-bottom: 40px;
+  }
+
+  .category-cards, .offers-cards {
+    justify-content: space-between;
+  }
+
+  .category-cards-item, .offers-cards-item {
+    width: calc(100% / 2.2);
+    margin: 0 0 30px 0;
+  }
+
+  .category-cards-item a {
+    font-size: 1.2rem;
+  }
+
 }
 
 
