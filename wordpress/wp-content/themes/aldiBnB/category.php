@@ -28,10 +28,15 @@ foreach($properties as $property) {
     "_price" => get_post_meta( $property->ID, '_price', true ),
     "_localisation" => get_post_meta( $property->ID, '_localisation', true )
   );
-    
+
   echo '</br>';
   var_dump($prop);
 }
 ?>
 
-<?php get_footer(); ?>
+
+<?php 
+
+alibnb_pagination();
+
+get_footer(); ?>
