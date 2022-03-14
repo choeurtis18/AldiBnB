@@ -32,8 +32,8 @@
     <?php if ((is_user_logged_in()) ) { ?>
       <a href="<?php echo wp_logout_url(site_url() );  ?>">
          <i class="fa fa-sign-out abnb-icon"aria-hidden="true"></i>
-         <a href="account"><i class="fa fa-user abnb-icon"aria-hidden="true"></i></a>
       </a>   
+      <a href="/account"><i class="fa fa-user abnb-icon"aria-hidden="true"></i></a>
     <?php } else { ?>
       <a id="abnb-inscription" class="abnb-register" href="/register">S'inscrire</a> /
       <a id="abnb-connection" class="abnb-register" href="/login">Se connecter</a>

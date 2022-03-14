@@ -84,16 +84,19 @@
     </div>
     <div id="aldibnb-acount-post_poste">
         <h1 class="aldibnb-acount-post-title" id="aldibnb-acount-post_poste-title">Annonces Postées</h1>
-        <span>Consultez vos annonces !</span>
         <div class="offers-cards" id="aldibnb-acount-post_poste-cards">
         <?php 
             $args = array(
                 'post_type'     => 'property',
-                'post_status'    => 'publish',
-                'post_author'      => 1
+                'post_status'   => 'publish',
+                'author'   => get_current_user_id()
             );
             $properties = get_posts( $args );
         ?>
+        <?php 
+        if(!empty($properties)) {
+        ?>
+        <span>Consultez vos annonces !</span>
         <?php 
         foreach($properties as $property) {
         ?>
@@ -117,24 +120,30 @@
 
                 </div>
             </div>
-        <?php } ?>
+        <?php }
+        } else {
+            echo 'pas de propriété trouvé';
+        }?>
         </div>
     </div>
 
     <div class="aldibnb-acount-post" id="aldibnb-acount-post_attente">
         <h1 class="aldibnb-acount-post-title">Annonces En Attente</h1>
-        <p>Vos annonces sont en cours de vérification, celles-ci seront publiées et déplacées dans "Annonces postés" une fois validées.</p>
         <div class="offers-cards" style="width:100%;" id="aldibnb-acount-post_attente-cards">
         <?php 
             $args = array(
                 'post_type'     => 'property',
                 'post_status'    => 'draft',
-                'post_author'      => 1
+                'author'      => get_current_user_id()
             );
             $properties = get_posts( $args );
         ?>
         <?php 
-        foreach($properties as $property) {
+        if(!empty($properties)) {
+        ?>
+        <p>Vos annonces sont en cours de vérification, celles-ci seront publiées et déplacées dans "Annonces postés" une fois validées.</p>
+        <?php
+            foreach($properties as $property) {
         ?>
             <?php 
             $prop = array(
@@ -155,7 +164,10 @@
                     <p id="aldibnb-acount-post_attente-card-price"><?= $prop['price']; ?>€ / Nuit</p>
                 </div>
             </div>
-        <?php } ?>
+        <?php }
+        } else {
+            echo "pas d'annonce en attente";
+        }?>
         </div>
     </div>
 
