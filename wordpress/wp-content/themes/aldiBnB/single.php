@@ -1,18 +1,18 @@
 <?php get_header(); ?>
 
 <?php if (have_posts()) : ?>
-    <div class="card-group">
+    <div class="offers-cards">
         <?php while (have_posts()) : ?>
 
             <?php the_post(); ?>
 
-            <div class="card">
-                <img src="<?php the_post_thumbnail_url(); ?>" class="card-img-top" alt="...">
-                <div class="card-body">
+            <div class="offers-cards-item">
+                <img src="<?php the_post_thumbnail_url(); ?>" alt="...">
+                <div class="card-details">
 
                     <?php if (get_post_meta(get_the_ID(), 'wpheticSponso', true)) : ?>
                         <div class="alert alert-primary" role="alert">
-                            Contenu Soponso
+                            Contenu Sponso
                         </div>
                     <?php endif; ?>
 
