@@ -30,6 +30,10 @@ Version: 1.0.0
    margin: 0!important;
  }
 
+ img {
+  object-fit: cover;
+ }
+
  /* ========= Nav bar ========== */
   
  #abnb-navbar {
@@ -260,8 +264,9 @@ p.header-frist_child {
   justify-content: space-between;
 }
 
-.post-double-img {
+.post-smallImg {
   width: 48%;
+  height: 170px;
 }
 
 /* Post Infos Container */
@@ -289,13 +294,14 @@ p.header-frist_child {
 
 /* Post Description Container */
 
-.post-description-container {
+.post-additional-container {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 25%);
   border-radius: 10px;
-  padding: 40px 30px;
+  padding: 60px 30px;
+  margin-bottom: 60px;
 }
 
-.post-description-container h4 {
+.post-additional-container h4 {
   padding-bottom: 8px;
   margin-bottom: 20px;
   border-bottom: 1px solid #202020;

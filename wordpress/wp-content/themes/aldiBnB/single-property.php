@@ -21,8 +21,8 @@
                 <div class="post-img-group">
                     <img class="post-mediumImg" src="<?= $prop['image']; ?>" alt="">
                     <div class="post-img-subGroup">
-                        <img class="post-double-img" src="<?= $prop['image']; ?>" alt="">
-                        <img class="post-double-img" src="<?= $prop['image']; ?>" alt="">
+                        <img class="post-smallImg" src="<?= $prop['image']; ?>" alt="">
+                        <img class="post-smallImg" src="<?= $prop['image']; ?>" alt="">
                     </div>
                 </div>
             </div>
@@ -35,9 +35,23 @@
                 <h2><?= $prop['_price']; ?></h2>
             </div>
 
-            <div class="post-description-container">
+            <div class="post-additional-container">
                 <h4>Description</h4>
                 <p><?= $prop['_description']; ?></p>
+            </div>
+
+            <div class="post-additional-container">
+                <h4>Commentaires</h4>
+                <div class="post-comments-group">
+                    <div class="post-comments-item">
+                        <div class="comments-head">
+                            <p></p>
+                            <p></p>
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+                <button></button>
             </div>
             
 
