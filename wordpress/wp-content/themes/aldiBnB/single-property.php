@@ -54,6 +54,7 @@
                 <button></button>
             </div>
             
+            <?php if ((is_user_logged_in()) ) { ?>
 
             <?php  
             if(comments_open() || get_comments_number())
@@ -62,7 +63,7 @@
             }
             
             ?>
-
+            <?php } ?>
       <?php endwhile; ?>
     </div>
 

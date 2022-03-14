@@ -67,6 +67,7 @@
 	color: #fff;
 }
 </style>
+<?php if ((is_user_logged_in()) ) { ?>
 <div id="aldibnb-form-card">
 	<span><?php echo $information;?></span>
     <?php 
@@ -110,4 +111,7 @@
 		<input type="submit" name="property-update-infos-envoi" id="submit-infos" class="submit-infos" value="Confirmer" />
 	</form>
 </div>
+<?php } else { 
+    echo "<script>window.location='".site_url()."/login'</script>";
+} ?>
 <?php get_footer(); ?>
