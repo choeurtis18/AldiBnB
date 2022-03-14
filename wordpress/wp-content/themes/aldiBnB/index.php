@@ -36,5 +36,13 @@
     <?php endif; ?>
 </div>
 
+<?php alibnb_pagination() ?>
+
+ 
+
+<?php else : ?>
+    <h1>Pas d'offres</h1>
+<?php endif; ?>
+
 <?php get_footer(); ?>
 
