@@ -28,30 +28,29 @@ function wpheticBootstrap()
     wp_enqueue_script("bootstrap_js", "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", [], false, true);
 }
 
-
-function wpheticPaginate()
+function alibnb_pagination()
 {
+    echo '<nav aria-label="Pagination" class="my-4">';
+    echo '<ul class="pagination justify-content-center pagination-sm">';
     $pages = paginate_links(['type' => 'array']);
-    var_dump($pages);die;
-    if (!$pages) {
-        return null;
-    }
+    // var_dump($pages);
+    foreach($pages as $page) {
 
-    ob_start();
-    echo '<nav aria-label="Page navigation example">';
-    echo '<ul class="pagination">';
+        $active = strpos($page, 'current') !== false;
+        $class = 'page-item' ; 
 
-    foreach ($pages as $page) {
-        $active = strpos($page, 'current');
-        $liClass = $active ? 'page-item active' : 'page-item';
-        $page = str_replace('page-numbers', 'page-link', $page);
+        if($active) {
+            $class .= ' active';
+        }
 
-        echo sprintf('<li class="%s">%s</li>', $liClass, $page);
-    }
-    echo '</ul></nav>';
-
-    return ob_get_clean();
+        echo '<li class="' . $class . '">';
+        echo str_replace('page-numbers', 'page-link', $page);
+        echo '</li>';
+    };
+    echo '</ul>';
+    echo '</nav>';
 }
+
 
 add_action('init', 'aldbnbInit');
 function aldbnbInit() {

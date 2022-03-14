@@ -27,10 +27,8 @@
 
 </div>
 
-
-<?php wpheticPaginate() ?>
-
-    
+<?php alibnb_pagination() ?>
+ 
 
 <?php else : ?>
     <h1>Pas d'offres</h1>

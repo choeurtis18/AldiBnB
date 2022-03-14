@@ -11,6 +11,7 @@
       $cat_description = $cat->description;
   ?>
 
+
   <div class="offers-cards">
   
     <?php
@@ -46,4 +47,9 @@
   </div>
 </div>
 
-<?php get_footer(); ?>
+
+<?php 
+
+alibnb_pagination();
+
+get_footer(); ?>
