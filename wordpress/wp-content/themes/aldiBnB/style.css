@@ -182,7 +182,7 @@ p.header-frist_child {
   align-items: center;
   background: #000;
   position: relative;
-  margin: 20px 33px;
+  margin: 20px;
 }
 
 .category-cards-item a{
@@ -207,7 +207,7 @@ p.header-frist_child {
   word-break: break-word;
   border-radius: 10px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 25%);
-  margin: 20px 33px;
+  margin: 20px;
 }
 
 .offers-cards-item img {
