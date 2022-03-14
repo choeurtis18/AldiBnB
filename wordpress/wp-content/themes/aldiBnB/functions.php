@@ -78,6 +78,23 @@ function aldbnbInit() {
     register_post_type('property', $args);
 }
 
+
+
+function redirect_to_custom_login(){
+    wp_redirect(site_url() . "/login");
+    exit();
+}
+add_action("wp_logout","redirect_to_custom_login");
+
+add_action("init","fn_redirect_wp_admin");
+function fn_redirect_wp_admin(){
+    global $pagenow;
+    if($pagenow == "wp-login.php" && $_GET['action'] != "logout"){
+        wp_redirect(site_url() . "/login");
+        exit();
+    }
+}
+
 function add_moderator_role() {
     add_role(
         'moderator',
@@ -92,6 +109,7 @@ function add_moderator_role() {
  
 add_action( 'init', 'add_moderator_role');
 
+
 require 'Classes/SponsoCheckbox.php';
 $checkbox = new SponsoCheckbox('wpheticSponso');
 
@@ -101,6 +119,26 @@ PropertyInformations::register($_POST);
 include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 
+
+
+
+function tf_check_user_role( $roles ) {
+    if ( is_user_logged_in() ) :
+        $user = wp_get_current_user();
+        $currentUserRoles = $user->roles;
+        $isMatching = array_intersect( $currentUserRoles, $roles);
+        $response = false;
+        if ( !empty($isMatching) ) :
+            $response = true;        
+        endif;
+        return $response;
+    endif;
+}
+$roles = [ 'customer', 'subscriber' ];
+if ( tf_check_user_role($roles) ) :
+    add_filter('show_admin_bar', '__return_false');
+endif;
+
 function add_property_form_management() {
 	if (isset($_POST['property-infos-envoi']) && isset($_POST['property-verif'])) {
 
@@ -108,25 +146,29 @@ function add_property_form_management() {
 
             echo ("</br>");
             echo ("</br>");
+            global $nameErr; 
+            global $name;
             if (empty($_POST["aldibnb-name"])) {
-                global $nameErr; 
                 $nameErr= "Name is required";
             } else {
                 $name = strval($_POST['aldibnb-name']);
             }
+
             global $priceErr ;
+            global $price;
             if (empty($_POST["aldibnb-prix"])) {    
                 $priceErr= "Price is required";
             } else {
                 if((int) $_POST['aldibnb-prix']) {
-                    $prix = intval($_POST['aldibnb-prix']);
+                    $price = intval($_POST['aldibnb-prix']);
                 } else {
                     $priceErr= "Price is not number";
                 }
             }
 
+            global $localisation;
+            global $localisationErr;
             if (empty($_POST["aldibnb-localisation"])) {
-                global $localisationErr;
                 $localisationErr = "Localisation is required";
             } else {
                 $localisation = strval($_POST['aldibnb-localisation']);
@@ -149,23 +191,23 @@ function add_property_form_management() {
                 }  
             }
 
-            /*
-            if (empty($_POST["aldibnb-image"])) {
-                global $imageErr;
+            global $imageErr;
+            if (empty($_FILES["aldibnb-image"])) {
                 $imageErr = "Image is required";
             } else {
-                $image = strval($_POST['aldibnb-image']);
+                $image = upload_post_img($_FILES['aldibnb-image']);
             }
-            */
+            
 
+            global $description;
+            global $descriptionErr;
             if (empty($_POST["aldibnb-description"])) {
-                global $descriptionErr;
                 $descriptionErr = "Description is required";
             } else {
                 $description = strval($_POST['aldibnb-description']);
             }
             
-            if($name && $prix && count($category) >0 && $localisation && $description) {
+            if($name && $price && count($category) >0 && $localisation && $description && $image) {
                 $my_post = array(
                     'post_title'    => $name,
                     'post_type'     => 'property',
@@ -176,11 +218,12 @@ function add_property_form_management() {
                 );
     
                 $post_id = wp_insert_post($my_post);
+
+                set_post_img($image, $post_id);
                 update_post_meta($post_id, '_description', $description);
-                update_post_meta($post_id, '_price', $prix);
+                update_post_meta($post_id, '_price', $price);
                 update_post_meta($post_id, '_localisation', $localisation);
                 
-                set_post_thumbnail($post_id, 4);
                 
                 global $information;
                 $information = "Propriété envoyé";
@@ -202,17 +245,19 @@ function update_property_form_management() {
             } else {
                 $name = strval($_POST['aldibnb-name']);
             }
-            global $priceErr ;
+
+            global $priceErr;
             if (empty($_POST["aldibnb-prix"])) {    
                 $priceErr= "Price is required";
             } else {
                 if((int) $_POST['aldibnb-prix']) {
-                    $prix = intval($_POST['aldibnb-prix']);
+                    $price = intval($_POST['aldibnb-prix']);
                 } else {
                     $priceErr= "Price is not number";
                 }
             }
-
+            
+            global $localisationErr;
             if (empty($_POST["aldibnb-localisation"])) {
                 global $localisationErr;
                 $localisationErr = "Localisation is required";
@@ -237,23 +282,21 @@ function update_property_form_management() {
                 }  
             }
 
-            /*
-            if (empty($_POST["aldibnb-image"])) {
-                global $imageErr;
+            global $imageErr;
+            if (empty($_FILES["aldibnb-image"])) {
                 $imageErr = "Image is required";
             } else {
-                $image = strval($_POST['aldibnb-image']);
+                $image = upload_post_img($_FILES['aldibnb-image']);
             }
-            */
-
+            
+            global $descriptionErr;
             if (empty($_POST["aldibnb-description"])) {
-                global $descriptionErr;
                 $descriptionErr = "Description is required";
             } else {
                 $description = strval($_POST['aldibnb-description']);
             }
             
-            if($name && $prix && count($category) >0 && $localisation && $description) {
+            if($name && $price && count($category) >0 && $localisation && $description && $image) {
                 $post_id = get_post(intval($_POST['aldibnb-id']))->ID;
                 $my_post = array(
                     'ID'            => $post_id,
@@ -262,11 +305,10 @@ function update_property_form_management() {
                 );
     
                 wp_update_post($my_post);
+                set_post_img($image, $post_id);
                 update_post_meta($post_id, '_description', $description);
-                update_post_meta($post_id, '_price', $prix);
+                update_post_meta($post_id, '_price', $price);
                 update_post_meta($post_id, '_localisation', $localisation);
-                
-                //set_post_thumbnail($post_id, 4);
                 
                 global $information;
                 $information = "MISE A JOUR TERMINE";
@@ -277,3 +319,59 @@ function update_property_form_management() {
 }
 add_action('template_redirect', 'update_property_form_management');
 
+
+function upload_post_img($image_file) {
+    $maxSize = 150000;
+    $validExt = array(".jpg", ".png", ".jpeg", ".gif");
+
+    global $imageErr;
+    if($image_file["error"] > 0) {
+        $imageErr = "erreur lors du transfert de l'image";
+    }
+
+    $file_size = $image_file["size"];
+    if ($file_size > $maxSize) {
+        $imageErr = "fichier trop lourd";
+    }
+
+    $file_name = $image_file["name"];
+    $file_ext = "." . strtolower(substr(strrchr($image_file["name"], "."), 1));
+    if (!in_array($file_ext, $validExt)) {
+        $imageErr = "le fichier n'est pas une image";
+    }
+
+    $tmp_name = $image_file["tmp_name"];
+    $unique_name = md5(uniqid(rand(), true));
+    $file_name = dirname(dirname(plugin_dir_path(__FILE__)))."/uploads/2022/02/02" . $unique_name . $file_ext;
+    $result = move_uploaded_file($tmp_name, $file_name);
+
+    if($result) {
+        return $file_name;
+    }else{
+        $imageErr = "Erreur lors de la sauvegarde du fichier";
+    }
+}
+
+function set_post_img($file, $parent_post_id) {
+    $filename = basename($file);
+
+    var_dump($parent_post_id);
+    $upload_file = wp_upload_bits($filename, null, file_get_contents($file));
+    if (!$upload_file['error']) {
+        $wp_filetype = wp_check_filetype($filename, null );
+        $attachment = array(
+            'post_mime_type' => $wp_filetype['type'],
+            'post_parent' => $parent_post_id,
+            'post_title' => preg_replace('/\.[^.]+$/', '', $filename),
+            'post_content' => '',
+            'post_status' => 'inherit'
+        );
+        $attachment_id = wp_insert_attachment( $attachment, $upload_file['file'], $parent_post_id );
+        if (!is_wp_error($attachment_id)) {
+            require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+            $attachment_data = wp_generate_attachment_metadata( $attachment_id, $upload_file['file'] );
+            wp_update_attachment_metadata( $attachment_id,  $attachment_data );
+            set_post_thumbnail($parent_post_id, $attachment_id);
+        }
+    }
+}

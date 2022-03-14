@@ -70,15 +70,14 @@
 <div id="aldibnb-form-card">
 	<span><?php echo $information;?></span>
 	<h1 id="aldibnb-form-card-title">Ajouter une Annonce</h1>
-	<form action="#" method="POST" class="aldibnb-form">
+	<form action="#" method="POST" class="aldibnb-form" enctype="multipart/form-data">
 		<?php wp_nonce_field('add-property', 'property-verif'); ?>
-		
 		<div class="aldibnb-form-child" id="aldibnb-a">	
-			Titre de l'offre :<span class="error">* <?php echo $nameErr;?></span><input class="form-input" id="aldibnb-name" type="text" name="aldibnb-name" maxlength="20"/>
+			Titre de l'offre :<span class="error">* <?php echo $nameErr;?></span><input class="form-input" id="aldibnb-name" type="text" name="aldibnb-name" maxlength="20" value="<?php echo $name;?>"/>
 			
-			Prix par nuit :<span class="error">* <?php echo $priceErr;?></span><input class="form-input" id="aldibnb-prix" type="text" name="aldibnb-prix" maxlength="5000"/>
+			Prix par nuit :<span class="error">* <?php echo $priceErr;?></span><input class="form-input" id="aldibnb-prix" type="text" name="aldibnb-prix" maxlength="5000" value="<?php echo $price;?>"/>
 			
-			Localisation :<span class="error">* <?php echo $localisationErr;?></span><input class="form-input" id="aldibnb-localisation" type="text" name="aldibnb-localisation" maxlength="20"/>
+			Localisation :<span class="error">* <?php echo $localisationErr;?></span><input class="form-input" id="aldibnb-localisation" type="text" name="aldibnb-localisation" maxlength="20" value="<?php echo $localisation;?>"/>
 			
 
 			Categorie :<span class="error">* <?php echo $categoryErr;?></span><input class="form-input" list="aldibnb-category" name="aldibnb-category">
@@ -93,7 +92,7 @@
 			<input id="aldibnb-image" type="file" name="aldibnb-image"/>
 			<span class="error">* <?php echo $imageErr;?></span>
 		</div>
-		<textarea class="aldibnb-form-child" id="aldibnb-description" name="aldibnb-description">Description</textarea>
+		<textarea class="aldibnb-form-child" id="aldibnb-description" name="aldibnb-description"><?php echo $description;?></textarea>
 		<span id="aldibnb-description-err" class="error"><?php echo '* '.$descriptionErr;?></span>
 
 		<input type="submit" name="property-infos-envoi" id="submit-infos" class="submit-infos" value="Confirmer" />
