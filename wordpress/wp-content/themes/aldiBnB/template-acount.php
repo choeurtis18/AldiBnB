@@ -74,6 +74,7 @@
     justify-content: right;
 }
 </style>
+<?php if ((is_user_logged_in()) ) { ?>
 <div id="aldibnb-acount" class="page-container">
     <div id="aldibnb-acount-header">
         <h1 id="aldibnb-acount-header-title"><?php if ( isset($current_user) ) {echo $current_user->user_login;} ?>, bienvenue sur votre compte</h1>
@@ -156,4 +157,7 @@
     </div>
 
 </div>
+<?php } else { 
+    echo "<script>window.location='".site_url()."/login'</script>";
+} ?>
 <?php get_footer(); ?>
