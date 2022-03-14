@@ -2,7 +2,12 @@
 
 <div class="page-container">
 
-  <p>Category: <?php single_cat_title(); ?></p>
+  <div class="category-title">
+    <h1><?php single_cat_title(); ?></h1>
+    <div class="category-filter-container">
+      <p>Par Types</p>
+    </div>
+  </div>
   <?php 
       remove_filter('term_description','wpautop');  
       $cat = get_category( get_query_var( 'cat' ) );
@@ -10,7 +15,6 @@
       $cat_name = $cat->name;
       $cat_description = $cat->description;
   ?>
-
 
   <div class="offers-cards">
   
