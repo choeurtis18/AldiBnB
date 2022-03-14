@@ -223,6 +223,20 @@ p.header-frist_child {
   padding: 10px;
 }
 
+.offers-card-sponso {
+  color: #A47035;
+  background-color: #202020;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.offers-card-btn:hover {
+  color: #A47035;
+}
+
 /* ========= Category Page ========== */
 
 .page-container {
@@ -351,9 +365,18 @@ footer p, .footer-icon {
   color: #EAEAEA;
 }
 
+.abnb-footer-child .nav-link:hover {
+  color: #A47035;
+}
+
 .footer-section {
   margin-bottom: 40px;
   text-align: center;
+}
+
+.footer-iconsGroup {
+  display: flex;
+  justify-content: center;
 }
 
 .footer-iconsGroup i {
@@ -361,9 +384,18 @@ footer p, .footer-icon {
   font-size: 2.2rem;
 }
 
+.footer-icon:hover {
+  padding-top: 10px;
+  transition-duration: 0.2s;
+}
+
 .footer-icon {
   margin: 0 15px;
   color: #A47035;
+  position: relative;
+  transition-duration: 0.2s;
+  padding-top: 0;
+  display: block;
 }
 
 @media screen and (max-width: 967px) {
@@ -423,6 +455,24 @@ footer p, .footer-icon {
     font-size: 1.2rem;
   }
 
+  /* ========= Property Page ========== */
+  .page-container {
+    margin: 30px 20px;
+  }
+
+  .offers-card-singleDisplay {
+    width: 100%;
+  }
+
+  /* ========= Post Page ========== */
+  .post-largeImg {
+    width: 100%;
+    height: auto;
+  }
+
+  .post-img-group {
+    display: none;
+  }
 }
 
 

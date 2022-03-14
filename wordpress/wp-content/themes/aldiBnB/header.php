@@ -44,14 +44,12 @@
 </nav>
 
 <?php
-/* 
     if(get_option('text_promo') == true && is_plugin_active('promo-plugin/promo-plugin.php'));
     {
         ?>
             <div style="background-color:<?=get_option('color_promo');?>;padding:1px; position: sticky; top:0;"><h3 style="font-size:2.2rem; text-align:center; color:<?=get_option('text_color_promo')?>"><?=get_option('text_promo');?></h3></div>
         <?php
     } 
-    */
 ?> 
 <div class="abnb-container">
 

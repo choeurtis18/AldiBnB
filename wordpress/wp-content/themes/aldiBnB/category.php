@@ -35,7 +35,7 @@
       );
     ?>
   
-    <div class="offers-cards-item">
+    <div class="offers-cards-item offers-card-singleDisplay">
       <img src="<?= $prop['image']; ?>" alt="">
       <div class="card-details">
         <a href= <?= $prop['link']; ?>> <?= $prop['name']; ?></a>
