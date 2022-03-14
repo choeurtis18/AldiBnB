@@ -32,7 +32,7 @@
                     <h1><?= $prop['name']; ?></h1>
                     <h3><?= $prop['_localisation']; ?></h3>
                 </div>
-                <h2><?= $prop['_price']; ?></h2>
+                <h2><?= $prop['_price']; ?> €</h2>
             </div>
 
             <div class="post-additional-container">
