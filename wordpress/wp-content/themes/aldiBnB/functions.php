@@ -33,7 +33,6 @@ function alibnb_pagination()
     echo '<nav aria-label="Pagination" class="my-4">';
     echo '<ul class="pagination justify-content-center pagination-sm">';
     $pages = paginate_links(['type' => 'array']);
-    // var_dump($pages);
     foreach($pages as $page) {
 
         $active = strpos($page, 'current') !== false;
@@ -206,7 +205,7 @@ function add_property_form_management() {
                     'post_type'     => 'property',
                     'post_content'  => '',
                     'post_status'   => 'draft',
-                    'post_author'   => 1,
+                    'post_author'   => get_current_user_id(),
                     'post_category' => $category
                 );
     
@@ -348,7 +347,6 @@ function upload_post_img($image_file) {
 function set_post_img($file, $parent_post_id) {
     $filename = basename($file);
 
-    var_dump($parent_post_id);
     $upload_file = wp_upload_bits($filename, null, file_get_contents($file));
     if (!$upload_file['error']) {
         $wp_filetype = wp_check_filetype($filename, null );

@@ -36,7 +36,7 @@ if($_POST){
 
     if(count($error)==0){
         WP_create_user($username,$password,$email);
-        echo "l'utilisateur a été crée avec succés";
+        echo "l'utilisateur a été crée avec succés, veuillez vous connecter";
         exit;
     }    
     else{
@@ -45,36 +45,46 @@ if($_POST){
 }
 
 ?>
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="text-center text-dark mt-5">Inscription</h2>
+        <div class="card my-5">
 
-<form method="post">
-    <br>  <br>  <br>  <br>  <br> 
-    <p>
-        <label for="txtUsername"> Nom d'utilisateur </label>
-        <div>
-            <input type="text" name="txtUsername" id="txtUsername" placeholder="Entrez un nom d'utilisateur"/>
-        </div>    
-    </p>
-    <p>
-        <label for="txtMail"> E-mail </label>
-        <div>
-            <input type="email" name="txtEmail" id="txtEmail" placeholder="Entrez un mail"/>
-        </div>    
-    </p>
-    <p>
-        <label for="txtPassword"> Mot de passe </label>
-        <div>
-            <input type="password" name="txtPassword" id="txtPassword" placeholder="Entrez un nom d'utilisateur"/>
-        </div>    
-    </p>
-    <p>
-        <label for="txtPassword"> Confirmation de mot de passe </label>
-        <div>
-            <input type="password" name="txtConfirmPassword" id="txtConfirmPassword" placeholder="Entrez un nom d'utilisateur"/>
-        </div>    
-    </p>
-    <input type="submit" name="btnSubmit" />
+          <form method="post" class="card-body cardbody-color p-lg-5">
 
-</form>
+            <div class="text-center">
+              <img src="<?php get_template_directory_uri() ?>/wp-content/uploads/2022/03/logo.png"  class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                width="200px" alt="profile">
+            </div>
+
+            <div class="mb-3">
+              <input type="text" name="txtUsername" class="form-control" id="Username" aria-describedby="emailHelp"
+                placeholder="Nom d'utilisateur / E-mail">
+            </div>
+            <div class="mb-3">
+              <input type="email" name="txtEmail" class="form-control" id="txtEmail" aria-describedby="emailHelp"
+                placeholder="E-mail">
+            </div>
+            <div class="mb-3">
+              <input type="password" name="txtPassword" class="form-control" id="txtPassword" placeholder="Mot de passe">
+            </div>
+            <div class="mb-3">
+              <input type="password" name="txtConfirmPassword" class="form-control" id="txtConfirmPassword" placeholder="Mot de passe">
+            </div>
+            <div class="text-center"><button name="btnSubmit" type="submit" class="btn btn-color px-5 mb-5 w-100">S'inscrire</button></div>
+            <div id="emailHelp" class="form-text text-center mb-5 text-dark">Dêja inscrit?
+                 <a href="http://localhost:5555/login/" class="text-dark fw-bold">Se connecter</a>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
 
 
 <?php get_footer(); 

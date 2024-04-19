@@ -70,7 +70,7 @@ Version: 1.0.0
  }
  
  .sub-menu {
-   display: flex;
+   display: none;
  }
 
  .abnb-nav-child .abnb-icon {
@@ -169,6 +169,7 @@ p.header-frist_child {
 
 .category-cards, .offers-cards{
   display: flex;
+  flex-wrap: wrap;
 }
 
 .category-cards-item {
@@ -181,7 +182,7 @@ p.header-frist_child {
   align-items: center;
   background: #000;
   position: relative;
-  margin: 0 33px;
+  margin: 20px;
 }
 
 .category-cards-item a{
@@ -206,7 +207,7 @@ p.header-frist_child {
   word-break: break-word;
   border-radius: 10px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 25%);
-  margin: 0 33px;
+  margin: 20px;
 }
 
 .offers-cards-item img {
@@ -222,10 +223,44 @@ p.header-frist_child {
   padding: 10px;
 }
 
+.offers-card-sponso {
+  color: #A47035;
+  background-color: #202020;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.offers-card-btn:hover {
+  color: #A47035;
+}
+
 /* ========= Category Page ========== */
 
 .page-container {
   margin: 40px 60px;
+}
+
+.category-title {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #202020;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.category-title h1 {
+  text-transform: capitalize;
+  font-size: 2rem;
+
+}
+
+.category-filter-container {
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 25%) ;
+  padding: 2px 15px;
+  border-radius: 10px;
 }
 
 /* ========= Post Page ========== */
@@ -339,6 +374,7 @@ footer p, .footer-icon {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
 }
 
 /* .abnb-footer-child li {
@@ -349,9 +385,18 @@ footer p, .footer-icon {
   color: #EAEAEA;
 }
 
+.abnb-footer-child .nav-link:hover {
+  color: #A47035;
+}
+
 .footer-section {
   margin-bottom: 40px;
   text-align: center;
+}
+
+.footer-iconsGroup {
+  display: flex;
+  justify-content: center;
 }
 
 .footer-iconsGroup i {
@@ -359,11 +404,118 @@ footer p, .footer-icon {
   font-size: 2.2rem;
 }
 
+.footer-icon:hover {
+  padding-top: 10px;
+  transition-duration: 0.2s;
+}
+
 .footer-icon {
   margin: 0 15px;
   color: #A47035;
+  position: relative;
+  transition-duration: 0.2s;
+  padding-top: 0;
+  display: block;
+}
+
+@media screen and (max-width: 967px) {
+  /* ========= NavBar ========== */
+  #abnb-navbar {
+    padding: 5px 10px;
+  }
+
+  .abnb-icon p {
+    display: none;
+  }
+
+  /* ========= Header ========== */
+  .form-searchBar {
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+  }
+
+  .form-searchBar input {
+    margin-right: 0;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .form-searchBar button {
+    width: 100%;
+  }
+
+  .header-title {
+    width: 100%;
+  }
+
+  .header-title p {
+    font-size: 2rem;
+  }
+
+  /* ========= Home Container ========== */
+  .home-container {
+    padding: 40px 20px;
+  }
+
+  .home-container-item {
+    margin-bottom: 40px;
+  }
+
+  .category-cards, .offers-cards {
+    justify-content: space-between;
+  }
+
+  .category-cards-item, .offers-cards-item {
+    width: calc(100% / 2.2);
+    margin: 0 0 30px 0;
+  }
+
+  .category-cards-item a {
+    font-size: 1.2rem;
+  }
+
+  /* ========= Property Page ========== */
+  .page-container {
+    margin: 30px 20px;
+  }
+
+  .offers-card-singleDisplay {
+    width: 100%;
+  }
+
+  /* ========= Post Page ========== */
+  .post-largeImg {
+    width: 100%;
+    height: auto;
+  }
+
+  .post-img-group {
+    display: none;
+  }
 }
 
 
 
 
+.btn-color{
+  background-color: #0e1c36;
+  color: #fff;
+  
+}
+
+.profile-image-pic{
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
+
+
+.cardbody-color{
+  background-color: #ebf2fa;
+}
+
+a{
+  text-decoration: none;
+}

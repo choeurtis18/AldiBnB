@@ -23,7 +23,6 @@ services:
             MYSQL_PASSWORD: pass
             MYSQL_RANDOM_ROOT_PASSWORD: 'root'
         volumes:
-            - ./datas:/var/lib/mysql
             - ./DumpSQL/aldiBnB_db.sql:/docker-entrypoint-initdb.d/aldiBnB_db.sql
 
     phpmyadmin:

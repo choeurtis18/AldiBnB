@@ -32,7 +32,7 @@
                     <h1><?= $prop['name']; ?></h1>
                     <h3><?= $prop['_localisation']; ?></h3>
                 </div>
-                <h2><?= $prop['_price']; ?></h2>
+                <h2><?= $prop['_price']; ?> € / Nuit</h2>
             </div>
 
             <div class="post-additional-container">
@@ -54,6 +54,7 @@
                 <button></button>
             </div>
             
+            <?php if ((is_user_logged_in()) ) { ?>
 
             <?php  
             if(comments_open() || get_comments_number())
@@ -62,7 +63,7 @@
             }
             
             ?>
-
+            <?php } ?>
       <?php endwhile; ?>
     </div>
 
